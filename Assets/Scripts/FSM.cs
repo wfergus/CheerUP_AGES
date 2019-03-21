@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class FSM : MonoBehaviour
 {
- public float elapsedTime;
+    public float elapsedTime;
 
 
-protected Transform playerTransform;
+    public Transform playerTransform;
 
-protected Vector3 destPos;
+    public Vector3 destPos;
 
-protected GameObject[] pointList;
+    public GameObject[] pointList;
 
-protected virtual void Initialize() { }
-protected virtual void FSMUpdate() { }
-protected virtual void FSMFixedUpdate() { }
+    public virtual void Initialize() { }
+    public virtual void FSMUpdate() { }
+    public virtual void FSMFixedUpdate() { }
 
-void Start()
-{
-    Initialize();
-}
-void Update()
-{
-    FSMUpdate();
-}
+    void Start()
+    {
+        Initialize();
+    }
 
-void FixedUpdate()
-{
-    FSMFixedUpdate();
-}
+    void Update()
+    {
+        FSMUpdate();
+    }
+
+    void FixedUpdate()
+    {
+        FSMFixedUpdate();
+    }
 }
