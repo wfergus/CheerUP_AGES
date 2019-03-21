@@ -66,7 +66,7 @@ public class CheerUpFSM : FSM
     }
     public void UpdatePatrolState()
     {
-        
+        curState = FSMState.Patrol;
     }
     public void UpdateMoveState()
     {
@@ -87,12 +87,13 @@ public class CheerUpFSM : FSM
         if (elapsedTime >= interactTimer)
         {
             print("interacting");
+            UpdateSleepState();
         }
 
     }
     public void UpdateSleepState()
     {
-
+        curState = FSMState.Interact;
     }
 }
 
