@@ -15,6 +15,7 @@ public class LookedAtInteractableDisplayText : MonoBehaviour
     private void Awake()
     {
         displayText = GetComponent<Text>();
+        UpdateDesplayText();
     }
 
     private void UpdateDesplayText()
