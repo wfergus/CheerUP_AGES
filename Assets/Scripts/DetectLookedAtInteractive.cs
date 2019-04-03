@@ -19,7 +19,6 @@ public class DetectLookedAtInteractive : MonoBehaviour
     //Event raised when the player looks at a different IInteracable
     public static event Action<IInteractable> LookedAtInteractableChanged;
 
-
     public IInteractable LookedAtInteractable
     {
         get { return lookedAtInteractable; }
@@ -35,7 +34,6 @@ public class DetectLookedAtInteractive : MonoBehaviour
     }
 
     private IInteractable lookedAtInteractable;
-
 
     private void FixedUpdate()
     {

@@ -6,17 +6,20 @@ using UnityEngine;
 public class InteractiveObject : MonoBehaviour, IInteractable
 {
     [SerializeField]
-    private string displayText = nameof(InteractiveObject);
+    protected string displayText = nameof(InteractiveObject);
 
     public string DisplayText => displayText;
+
     private AudioSource audioSource;
-    
+    //protected Light lightSource;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        //lightSource = lightSource?.GetComponent<Light>();
     }
 
-    public void InteractWith()
+    public virtual void InteractWith()
     {
         try
         {
