@@ -43,6 +43,8 @@ public class CheerUpFSM : FSM
         GameObject objPlayer = GameObject.FindGameObjectWithTag("Player");
         playerTransform = objPlayer.transform;
 
+        GameObject objAI = GameObject.FindGameObjectWithTag("ai");
+
         // Get the rigidbody
         rigidbody = GetComponent<Rigidbody>();
 
@@ -71,7 +73,7 @@ public class CheerUpFSM : FSM
     public void UpdateMoveState()
     {
         curState = FSMState.Move;
-        print("Switch to Move State");
+        Debug.Log("Switch to Move State");
 
         // if the A.I. reaches the destPos, interact
         if (Vector3.Distance(transform.position, destPos) == 0.0f)
@@ -86,7 +88,7 @@ public class CheerUpFSM : FSM
 
         if (elapsedTime >= interactTimer)
         {
-            print("interacting");
+            Debug.Log("interacting");
             UpdateSleepState();
         }
 

@@ -11,9 +11,11 @@ public class Waypoint : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("hit wp");
             //CheerUpFSM.destPos = ;//next interact position
             CheerUpFSM.interactTimer = timeLength;// waypoint needs a property called timeLength. associated with the next interactions length
             CheerUpFSM.UpdateMoveState();
+
         }
     }
 }
