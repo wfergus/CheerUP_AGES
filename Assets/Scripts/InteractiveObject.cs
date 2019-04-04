@@ -13,7 +13,7 @@ public class InteractiveObject : MonoBehaviour, IInteractable
     private AudioSource audioSource;
     //protected Light lightSource;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         //lightSource = lightSource?.GetComponent<Light>();
