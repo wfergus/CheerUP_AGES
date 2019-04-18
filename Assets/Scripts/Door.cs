@@ -5,6 +5,24 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Door : InteractiveObject
 {
+    [Tooltip("Check this box to lock the door")]
+    [SerializeField]
+    private bool isLocked;
+
+    [Tooltip("Text that displays whne the player looks at a locked door")]
+    [SerializeField]
+    private string lockedDisplayText = "Locked";
+
+    [Tooltip("Play this audio clip when the player interacts with a locked door without having the key")]
+    [SerializeField]
+    private AudioClip lockedAudioClip;
+
+    [Tooltip("The audio clip that plays when the door opens")]
+    [SerializeField]
+    private AudioClip openAudioClip;
+
+    public override string DisplayText => isLocked ? lockedDisplayText : base.DisplayText;
+
     private Animator animator;
     private bool isOpen = false;
     /// <summary>
@@ -26,10 +44,17 @@ public class Door : InteractiveObject
     {
         if (!isOpen)
         {
-            animator.SetBool("shouldOpen", true);
-            base.InteractWith();
-            displayText = string.Empty;
-            isOpen = true;
+            if (!isLocked)
+            {
+                audioSource.clip = openAudioClip;
+                animator.SetBool("shouldOpen", true);
+                displayText = string.Empty;
+                isOpen = true;
+            }
+            else
+                audioSource.clip = lockedAudioClip;
+
+            base.InteractWith(); //plays sound effect
         }
     }
 }
