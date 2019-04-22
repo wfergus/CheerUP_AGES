@@ -7,21 +7,17 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
 {
-    //public Transform seeker, target;
-
     PathRequestManager requestManager;
     Grid grid;
 
-    //private void Update()
-    //{
-    //    FindPath(seeker.position, target.position);
-    //}
+    //gets the Grid and PathRequestManager components
     void Awake()
     {
         grid = GetComponent<Grid>();
         requestManager = GetComponent<PathRequestManager>();
     }
 
+    //finds path with using a coroutine for use with multiple agents
     public void StartFindPath(Vector3 startPos, Vector3 targetPos)
     {
         StartCoroutine(FindPath(startPos, targetPos));
@@ -31,30 +27,37 @@ public class Pathfinding : MonoBehaviour
         Vector3[] waypoints = new Vector3[0];
         bool pathSuccess = false;
 
+        // makes nodes out of the start and target vector 3s
         Node startNode = grid.NodeFromWorldPoint(startPos);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
 
         if (startNode.IsWalkable && targetNode.IsWalkable)
         {
             Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
+            //HashSet used to avoid duplicates in the closed set
             HashSet<Node> closedSet = new HashSet<Node>();
 
+            //adds the starting position to the open set
             openSet.Add(startNode);
 
+            //while there are nodes in the open set
             while (openSet.Count > 0)
             {
+                //removes the current node from open set
                 Node currentNode = openSet.RemoveFirst();
-
+                //adds current node to closed set
                 closedSet.Add(currentNode);
-
+                //checks if the agent has reached its target 
                 if (currentNode == targetNode)
                 {
+                    //if target reached, the path was a success and breaks
                     pathSuccess = true;
                     break;
                 }
-
+                //gets the nodes around the current node on the grid
                 foreach (Node neighbor in grid.GetNeighbors(currentNode))
                 {
+                    //checks if the neighbor node is walkable OR already closed
                     if (!neighbor.IsWalkable || closedSet.Contains(neighbor))
                     {
                         continue;
@@ -93,7 +96,6 @@ public class Pathfinding : MonoBehaviour
         Vector3[] waypoints = SimplifyPath(path);
         Array.Reverse(waypoints);
         return waypoints;
-       //grid.path = path;
     }
 
     Vector3[] SimplifyPath(List<Node> path)
@@ -113,6 +115,7 @@ public class Pathfinding : MonoBehaviour
         return waypoints.ToArray();
     }
 
+    //Finds distance between nodes (10 on NSEW axis and 14 on diagonal)
     int GetDistance(Node nodeA, Node nodeB)
     {
         int distX = Mathf.Abs(nodeA.GridX - nodeB.GridX);
