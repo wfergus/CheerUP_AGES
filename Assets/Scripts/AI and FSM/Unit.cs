@@ -15,12 +15,13 @@ public class Unit : MonoBehaviour
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 
+    //checks if path was found and sets it
     private void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
         if (pathSuccessful)
         {
             path = newPath;
-            //StopCorutine("FollowPath");
+            //StopCorutine("FollowPath"); //gave me errors?
             StartCoroutine("FollowPath");
         }
     }
@@ -43,6 +44,7 @@ public class Unit : MonoBehaviour
             yield return null;
         }
     }
+    //supposedly draws a visualization of the a* path, not currently working
     public void OnDrawGizmos()
     {
         if (path != null)

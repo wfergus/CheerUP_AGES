@@ -57,7 +57,7 @@ public class Pathfinding : MonoBehaviour
                 //gets the nodes around the current node on the grid
                 foreach (Node neighbor in grid.GetNeighbors(currentNode))
                 {
-                    //checks if the neighbor node is walkable OR already closed
+                    //checks if the neighbor node is walkable OR already closed before bothering to calculate
                     if (!neighbor.IsWalkable || closedSet.Contains(neighbor))
                     {
                         continue;

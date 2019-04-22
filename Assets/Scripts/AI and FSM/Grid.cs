@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    //public bool onlyDisplayPathGizmos;
+    //public bool onlyDisplayPathGizmos; //old gizmo visualization
     public bool displayGridGizmos;
     Node[,] grid;
     public Vector2 gridWorldSize;
@@ -22,6 +22,7 @@ public class Grid : MonoBehaviour
         CreateGrid();
     }
 
+    //creates grids based on specified x and y
     public int MaxSize
     {
         get
@@ -29,6 +30,8 @@ public class Grid : MonoBehaviour
             return gridSizeX * gridSizeY;
         }
     }
+
+    //makes a grid given the specified grid size
     void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
@@ -45,6 +48,7 @@ public class Grid : MonoBehaviour
         }
     }
 
+    //finds neighbor nodes
     public List<Node> GetNeighbors(Node node)
     {
         List<Node> neighbors = new List<Node>();
@@ -68,6 +72,7 @@ public class Grid : MonoBehaviour
         return neighbors;
     }
 
+    //relates transform position to node position
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
         float percentX = (worldPosition.x - transform.position.x) / gridWorldSize.x + 0.5f - (nodeRadius / gridWorldSize.x);
@@ -81,6 +86,7 @@ public class Grid : MonoBehaviour
         return grid[x, y];
     }
 
+    //previous gizmo visualization is commented out
     //public List<Node> path;
     void OnDrawGizmos()
     {
