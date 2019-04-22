@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Generic class that re-arranges (potential) movement to neighbors as they are calculated
+//Generic class that re-arranges (potential) node movement to neighbors as they are calculated
 public class Heap<T> where T : IHeapItem<T>
 {
     T[] items;
