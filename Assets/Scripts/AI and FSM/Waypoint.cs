@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//not currently being used
 public class Waypoint : MonoBehaviour
 {
     public float timeLength;

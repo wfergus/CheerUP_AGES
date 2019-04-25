@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//defines 'Node' and takes from IHeapItem to rearrange them for optimal movement by cost
 public class Node : IHeapItem<Node>
 {
     public bool IsWalkable;

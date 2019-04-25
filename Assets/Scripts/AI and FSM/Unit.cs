@@ -21,7 +21,6 @@ public class Unit : MonoBehaviour
         if (pathSuccessful)
         {
             path = newPath;
-            //StopCorutine("FollowPath"); //gave me errors?
             StartCoroutine("FollowPath");
         }
     }
@@ -44,7 +43,7 @@ public class Unit : MonoBehaviour
             yield return null;
         }
     }
-    //supposedly draws a visualization of the a* path, not currently working
+    //supposedly draws a visualization of the a* path dependent on unity version
     public void OnDrawGizmos()
     {
         if (path != null)

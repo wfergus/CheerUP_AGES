@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    //public bool onlyDisplayPathGizmos; //old gizmo visualization
     public bool displayGridGizmos;
     Node[,] grid;
     public Vector2 gridWorldSize;
@@ -86,37 +85,17 @@ public class Grid : MonoBehaviour
         return grid[x, y];
     }
 
-    //previous gizmo visualization is commented out
-    //public List<Node> path;
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
-
-        //if (onlyDisplayPathGizmos)
-        //{
-        //    if (path != null)
-        //    {
-        //        foreach (Node n in path)
-        //        {
-        //            Gizmos.color = Color.black;
-        //            Gizmos.DrawCube(n.WorldPosition, Vector3.one * (nodeDiameter - .1f));
-        //        }
-        //    }
-        //}
-        //else
-        //{
 
             if (grid != null && displayGridGizmos)
             {
                 foreach (Node n in grid)
                 {
                     Gizmos.color = (n.IsWalkable) ? Color.white : Color.red;
-                    //if (path != null)
-                    //    if (path.Contains(n))
-                    //        Gizmos.color = Color.black;
                     Gizmos.DrawCube(n.WorldPosition, Vector3.one * (nodeDiameter - .1f));
                 }
             }
-        //}
     }
 }
