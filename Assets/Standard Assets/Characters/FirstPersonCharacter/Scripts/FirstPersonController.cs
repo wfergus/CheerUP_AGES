@@ -177,14 +177,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void UpdateCameraPosition(float speed)
         {
             Vector3 newCameraPosition;
-            //if (crouch)
-            //{
-
-            //}
-            
-                newCameraPosition = m_Camera.transform.localPosition;
-                newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
-          
             m_Camera.transform.localPosition = newCameraPosition;
         }
 

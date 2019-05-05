@@ -625,7 +625,6 @@ PlayerSettings:
   facebookStatus: 1
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
-  apiCompatibilityLevel: 6
   cloudProjectId: 431ef35e-8d59-4ad8-a65b-164acf21e13b
   framebufferDepthMemorylessMode: 0
   projectName: CheerUp_AGES
