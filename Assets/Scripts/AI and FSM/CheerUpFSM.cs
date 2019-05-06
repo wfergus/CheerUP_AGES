@@ -3,23 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CheerUpFSM : FSM
-{
-    /// <summary>
-    /// enum for checkpoints? or boolians? if player character hits a chieckpoint should it flip a bool
-    /// or should it change state. a bool would require multiple if statements and checks in order to 
-    /// decide where the character is sthrough progression. a state could send them straight to a common
-    /// series of actions due to progression.
-    /// OR
-    /// on collision events? collision areas that only apear based on previous collions. 
-    /// </summary>
-   
+{   
     public enum FSMState
     {
-        None,
         Patrol,
-        Move,
-        Interact,
-        Sleep,
+        Walk,
+        Flee
     }
 
     public FSMState curState;
@@ -30,11 +19,14 @@ public class CheerUpFSM : FSM
     // We overwrite the deprecated built-in `rigidbody` variable.
     new public Rigidbody rigidbody;
 
+    public float curSpeed;
+
     public override void Initialize()
     {
         curState = FSMState.Patrol;
         elapsedTime = 0.0f;
-        interactTimer = 0.0f;
+        curSpeed = 10f;
+        
 
         //Get the list of points
         pointList = GameObject.FindGameObjectsWithTag("Waypoint");
@@ -43,59 +35,58 @@ public class CheerUpFSM : FSM
         GameObject objPlayer = GameObject.FindGameObjectWithTag("Player");
         playerTransform = objPlayer.transform;
 
-        GameObject objAI = GameObject.FindGameObjectWithTag("ai");
+        GameObject agent = GameObject.FindGameObjectWithTag("Agent");
 
-        // Get the rigidbody
-        rigidbody = GetComponent<Rigidbody>();
 
         if (!playerTransform)
             print("Player doesn't exist.. Please add one with Tag named 'Player'");
-
     }
+
     public override void FSMUpdate()
     {
         switch (curState)
         {
             case FSMState.Patrol: UpdatePatrolState(); break;
-            case FSMState.Move: UpdateMoveState(); break;
-            case FSMState.Interact: UpdateInteractState(); break;
-            case FSMState.Sleep: UpdateSleepState(); break;
+            case FSMState.Walk: UpdateWalkState(); break;
+            case FSMState.Flee: UpdateFleeState(); break;
         }
-
         //Update the time
         elapsedTime += Time.deltaTime;
-
     }
+
     public void UpdatePatrolState()
     {
+        curSpeed = 5f;
         curState = FSMState.Patrol;
-    }
-    public void UpdateMoveState()
-    {
-        curState = FSMState.Move;
-        Debug.Log("Switch to Move State");
 
-        // if the A.I. reaches the destPos, interact
-        if (Vector3.Distance(transform.position, destPos) == 0.0f)
-        {
-            UpdateInteractState();
-        }
+        Debug.Log("Switch to Patrol State");
     }
-    public void UpdateInteractState()
+
+    public void UpdateWalkState()
     {
-        curState = FSMState.Interact;
+        curSpeed = 5f;
+        curState = FSMState.Walk;
+            
+        Debug.Log("Switch to Walk State");
+    }
+
+    public void UpdateFleeState()
+    {
+        curSpeed = 10f;
+        curState = FSMState.Flee;
         elapsedTime = 0.0f;
 
-        if (elapsedTime >= interactTimer)
-        {
-            Debug.Log("interacting");
-            UpdateSleepState();
-        }
+        Debug.Log("Switch to Flee State");
 
+        if (elapsedTime >= 5)
+            UpdatePatrolState();
     }
-    public void UpdateSleepState()
+    public void OnCollisionEnter(Collision collision)
     {
-        curState = FSMState.Interact;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            UpdateFleeState();
+        }
     }
 }
 

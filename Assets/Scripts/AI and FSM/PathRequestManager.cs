@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 /// <summary>
-/// A class that creates a que in so that multiple AI agents arn not on top of each other when finding thier paths
+/// A class that creates a que so that multiple AI agents are not on top of each other when finding thier paths
 /// If two agents request the exact same path only one of them will be able to take it
 /// </summary>
 public class PathRequestManager : MonoBehaviour

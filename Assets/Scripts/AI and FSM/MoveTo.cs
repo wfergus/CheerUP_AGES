@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+//simple waypoint movement
 public class MoveTo : MonoBehaviour
 {
     //place to set target destination

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Waypoint
   - ai
+  - Agent
   layers:
   - Default
   - TransparentFX

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UnityWaypoint : MonoBehaviour
 {
+    
     public GameObject[] wayPoints;
     public int num = 0;
 
@@ -13,6 +14,7 @@ public class UnityWaypoint : MonoBehaviour
     public bool rand = false;
     public bool move = true;
 
+   
     void Update()
     {
         float dist = Vector3.Distance(gameObject.transform.position, wayPoints[num].transform.position);
